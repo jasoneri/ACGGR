@@ -1,0 +1,135 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+##----------idea----------
+*.iml
+.idea/
+*.ipr
+*.iws
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+node_modules/
+
+# Translations: res/i18n/<lang>.yml is the only tracked file. res/i18n compiles
+# it to <lang>.qm on launch (PySide6 lupdate + lrelease); the .ts is a temp file
+# and the .hash is the compile cache stamp. None of them belong in git.
+*.po
+*.mo
+*.pot
+*.hash
+*.ts
+*.qm
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Local logs / databases
+*.log
+db.sqlite3
+db.sqlite3-journal
+
+# GUI related
+*.ui
+source/
+
+# vscode
+.vscode
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv-smoke/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# ----------acggr local (never tracked)----------
+# Local test scripts & probes: kept locally, never committed
+test/
+__temp/
+plans/
+*.db*
+version.json
+desc.html
+nul
+data/
+outputs/
+private_*.json
+*test*.py
+*_local.yml
+*.lock
+
+# ----------resources----------
+# Track ONLY the compiled rcc module (res/material_ct.py): every byte of the
+# .qrc and of the svg/png/ico it packs is already inlined into that module, so
+# tracking the sources too would store the same resources twice. This is the
+# upstream GUI project's arrangement (see harness/docs/res-assets.md).
+#
+# The .qrc and the raw assets stay local (regenerate the module with
+# `pyside6-rcc res/app.qrc -o res/material_ct.py`); the repo-root logo.png is
+# the one original that IS tracked, because README.md shows it directly.
+*.rcc
+*.qrc
+res/*.svg
+res/*.png
+res/*.ico
+
+# OSX
+*~
+.DS_Store
+
+# ----------agent harness (local only)----------
+# Probes/guards and architecture contracts live here for development and AI
+# sessions; they are working knowledge, not part of the shipped repository.
+harness/
+
+# AI
+.cursor
+.claude
+.codex
+.gemini
+.kilocode
+.ace-tool/
+openspec/
+.omc
+*.*ai

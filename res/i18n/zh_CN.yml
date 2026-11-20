@@ -1,0 +1,547 @@
+# acggr zh_CN wording table -- the only translation file in the repository.
+#
+# Keys are semantic IDs, qtTrId()-style: <feature>.<widget>.<element>. They are
+# stable English identifiers, so a wording can be rewritten without touching
+# code, and a translator never reads a foreign sentence as a key.
+#
+# Compiled at runtime: `res.i18n` turns this file into an id-based .ts, runs
+# PySide6's own lrelease on it and loads the .qm through a plain QTranslator.
+# Nothing compiled is ever committed. `res/i18n/build.py --check` reports IDs
+# used in code but missing here, and keys no qtTrId() call uses any more.
+
+aria2:
+  ariang:
+    download_failed: 'AriaNg 下载失败: {error}'
+    downloading: 正在从 preset release 下载 AriaNg…
+    file_missing: 下载完成但文件缺失：{path}
+    not_downloaded: AriaNg 页面尚未下载（首次进入时自动从 preset release 获取）
+    ready:
+      instance_unreadable: 已就绪 · aria2 实例记录不可读
+      not_running: 已就绪 · aria2 未运行（面板可打开，显示未连接）
+      rpc: 已就绪 · aria2 RPC 127.0.0.1:{port}
+  config:
+    download_proxy: 下载代理
+    download_proxy_hint: 仅作用于 aria2 下载任务；HTTP(S) 代理
+    keep_history: 保留下载历史（条数）
+    keep_history_hint: 只保留最近 N 条；0 表示不保留
+    proxy_placeholder: http://127.0.0.1:7890
+    title: Aria2 下载引擎
+ariang:
+  title: AriaNg
+browser:
+  address:
+    placeholder: 输入链接后回车
+  challenge:
+    continue: 继续请求
+  cloudflare:
+    hint: "cf验证需要人工点击，请耐心等待(空白页则刷新)\n之后首页出现会自动退回界面，全程不要主动关闭内置浏览器"
+  devtools:
+    title: 开发者工具
+  download:
+    completed: '下载完成: {path}'
+    interrupted: '下载中断: {reason}'
+    select_path: 选择保存位置
+    started: '开始下载: {name}'
+    unknown_reason: 未知原因
+  page:
+    preview_failed: 页面脚本返回异常，请刷新预览后重试
+    preview_not_ready: 预览脚本尚未就绪，请稍后再试
+  title:
+    inner: 内置浏览器
+  toolbar:
+    always_on_top: 窗口置顶
+    back: 后退
+    copied: 已复制链接
+    copy_unfinished: 复制未完成
+    download_selected: 下载所选
+    forward: 前进
+    home: 回到初始页
+    refresh: 刷新页面
+cbg:
+  api:
+    hint: 使用 引力圈 赞助方案获取 api, 复制至此..
+    importing: 正在导入 API 资源…
+    paste_first: 请先粘贴 API 链接
+    reading_remote: 正在读取远端数据…
+  import:
+    apply_to_cgs: 是否应用到 cgs 的 bg_path
+    done: 导入完成，已切换到新目录
+    include_previous: 包含此前
+  path:
+    cards_hint: 选择 PNG 目录后会在这里展示卡片
+    png_directory: PNG 目录
+    select_directory: 选择 Cbg PNG 目录
+  userscript:
+    copied: 已复制进剪贴板，导入到浏览器油猴脚本中使用
+    firefox_hint: (火狐无法使用，需进扩展勾选`允许访问文件网址`权限)
+common:
+  action:
+    cancel: 取消
+    not_selected: 未选择
+  error:
+    log_detail: '{summary}。详情见日志：{log_path}'
+  example_prefix: '例如:'
+  menu:
+    paste: 粘贴
+    select_all: 全选
+  save_path:
+    select: 选择目录
+    title: 存储路径
+  select:
+    box_hint: 左键拖拽框选，右键可清空选择
+  task:
+    cancelled: 任务已取消
+    completed: 任务已完成
+    done: 操作完成
+    please_wait: 请稍候
+    processing: 处理中...
+    repeat_suffix: （×{count}）
+    running: 任务 '{task_id}' 正在运行中
+    start_failed: 任务启动失败
+  warning:
+    title: 警告
+danbooru:
+  action:
+    merge_folders: 整合目录
+  card:
+    preview_error: 预览失败
+    video_preview: 视频预览
+  challenge:
+    title: Danbooru 验证
+  config:
+    concurrency: 下载并发
+    concurrency_hint: 下载任务并发数
+    display_scale: 图片展示缩放
+    display_scale_hint: 控制 图片viewer 的展示面积
+    viewer_source_mode: 显示清晰度
+    viewer_source_mode_hint: 自动按实测网速选择，也可固定为原图或缩略图
+    viewer_source_mode_auto: 自动
+    viewer_source_mode_on: 原图
+    viewer_source_mode_off: 缩略图
+    hide_unpreviewable: 隐藏不可预览
+    hide_unpreviewable_hint: 列表不显示没有可渲染内容的条目，图片viewer 上/下一张同步跳过
+    save_mode:
+      by_search_tag: 按搜索标签
+      default: 默认
+      title: 保存方式
+    save_mode_hint: 默认则保存到下载目录，或按搜索标签创建子目录
+    select_dir_title: 选择 Danbooru 存储目录
+    title: Danbooru 配置
+    viewer_default_pin: 默认置顶
+    viewer_default_pin_hint: 启动后打开 图片viewer 时 pin（置顶）默认勾选
+  export:
+    ai_merge: AI 合并 Prompt
+    clear_attached: 清除附着图（Attached-tags）
+    comfy_queue: Comfy 任务队列
+    complete_from_image: 图内补全
+    copy_prompt: 复制 Prompt
+    denoise_strength: 重绘强度
+    denoise_strength_hint: 重绘强度：turbo 需 ≥85% 才会改动内容，base / aesthetic 约 60% 起效。
+    describe_change: 描述要修改的内容
+    deselect_all: 取消全选
+    detecting_wd14: 检测 WD14 节点中…
+    format_prompt: 格式化 Prompt
+    no_image_attached: 尚未附着图片
+    no_usable_tags: 附着物无可用 tags
+    prompt_preview: Prompt 预览
+    restore_defaults: 恢复默认(General)
+    select_all: 全选
+    title: Tag 导出
+    wd14_hint: 让 WD14 从图片本身补充 danbooru 遗漏的 tag
+  fav_chips:
+    insert_into: 插入到
+    search_group: 搜索本组 tag
+    section:
+      artist: 作者 (artist)
+      body: 通用 (body)
+      character: 角色 (character)
+      series: 系列 (series)
+  favorites:
+    custom_section: 自定义区
+    default_group: 默认收藏
+    default_section: 默认区
+    delete_group_or_tag: 删除选中组或标签
+    delete_tag: 删除选中标签
+    group_delete_default: 默认收藏组不可删除
+    group_exists: '收藏组已存在: {name}'
+    group_missing: '收藏组不存在: {name}'
+    group_name_empty: 收藏组名称不能为空
+    group_name_reserved: '收藏组名称不能是 {name}'
+    group_rename_default: 默认收藏组不可重命名
+    move_to: '移动到:'
+    save: 保存收藏
+    select_custom_first: 请先选中自定义区的组或标签
+    select_default_tag_first: 请先选中默认区标签
+    tag: 标签
+    target_group: '目标分组:'
+  interface:
+    jsoneri_unavailable: jsoneriPalaces 未加载，无法打开 imgPalace
+  jobs:
+    cancel_failed: Comfy 任务取消失败：{error}
+    cancelled: 已取消
+    clipboard_unavailable: 系统剪贴板不可用
+    empty: 暂无任务
+    export_panel_unavailable: Tag 导出面板不可用，无法附着
+    failed: 失败
+    image_missing: 图片缺失
+    load_image_failed: 无法加载输出图片：{error}
+    moved_to_del: 已移入 .del 并移除记录：{moved_path_name}
+    no_local_snapshot: 该任务没有本地快照（仅经 acggr 提交的任务可附着）
+    no_prompt_snapshot: 该任务没有可复制的 Prompt 快照
+    offline_restored: Comfy 暂不可用，已从本地恢复任务卡：{remote_error}
+    open_image_failed: 无法打开输出图片：{error}
+    open_output_dir_failed: 无法打开 Comfy 输出目录：{error}
+    output_missing: 输出图片已不存在（可能已被清理）
+    output_missing_404: 输出图片已不存在（Comfy 返回 404）
+    prompt_copied: 已复制任务 Prompt
+    record_delete_failed: 任务记录已移除，但移入 .del 失败：{delete_error}
+    record_removed: 已移除任务记录（本地输出图已不存在或无法定位）
+    refresh_failed: Comfy 任务列表刷新失败：{error}
+    tags_attached: 已附着成图 tags，并还原生成设置（Prompt 预览未改动）
+    title: Comfy 任务
+  pagination:
+    hint_home: 首页结果极大：建议加 tag 再深跳；可跳范围受软上限限制
+    hint_large: 共 {total} 页（站点 cap {cap}）；深页可能较慢
+    hint_pending: 总页数未就绪，可输入页码尝试跳转
+    hint_total: 共 {total} 页
+    invalid: 请输入有效页码
+    jump: 跳转
+    out_of_range: 页码超出范围（最大 {target_page}）
+    page: 页码
+    soft_cap: 首页深跳受软上限限制（最多到 p{target_page}）。建议加 tag 后再跳页。
+  preview:
+    decode_failed: 图片解码失败
+    decode_failed_hint: 图片数据不是有效格式或已损坏
+    failed: '{media_hint} 预览失败'
+    failed_detail: '{media_hint} 预览失败：{first_line}'
+    failed_label: fail/预览失败
+    failed_label_detail: fail/预览失败：{first_line}
+    not_an_image: 返回内容不是可渲染的图片（{media_hint}）
+    not_renderable: '{media_hint} 无法渲染预览，可下载原文件 / non-renderable preview'
+    unavailable: 当前作品没有可用预览 / non preview
+    unknown_format: 未知格式
+    zip_original: ZIP 原文件，可显示预览图；原文件仍需下载 / ZIP original, preview asset
+  search:
+    empty_query_home: 空词搜索进入首页
+    extra_placeholder: '例如: score:>50'
+    placeholder: '例如: blue_archive'
+    verification_required: 需要验证
+  sort:
+    default: 默认
+    oldest: 最旧
+    score: 评分
+  tab:
+    clear_before_page: 清除此页前图片
+    clear_selection: 清空选择
+    close: 关闭
+    completion_empty: 无匹配
+    favorite_groups: 收藏组
+    no_favorites: 暂无收藏
+    open_history: 打开历史
+    pin: Pin tab
+    pin_list: Pin 的 tab
+    unpin: 取消 Pin
+  tag:
+    translating: 翻译中
+  tag_action:
+    ai_merge_failed: 'AI Prompt 合并失败: {summary}'
+    ai_merged: AI 已合并 Prompt
+    ai_merging: AI Prompt 合并中
+    ai_updating_editor: 正在根据自然语言修改编辑器内容
+    anima:
+      cancelled: ANIMA [{preset}] 已取消
+      generate_failed: ANIMA 出图失败：{tail}（完整堆栈见日志）
+      generated: ANIMA [{preset}] 出图完成，{image_count} 张
+      not_ready: imgPalace 尚未就绪，请先配置 jsoneriPalaces
+      submit_failed: ANIMA 提交失败：{error}（完整堆栈见日志）
+      submitted: ANIMA [{preset}] 已提交，进度见按钮与任务面板
+    attached_current_image: 已附着当前图到 Attached-tags
+    comfy:
+      host_missing: 未配置 Comfy host（Script Settings → ComfyUI）
+      notes: Comfy 配置说明
+      queued: 排队中 · {preset}
+      running: 执行中
+    export_panel_required: 请先打开 Tag 导出面板再附着
+    no_post_to_attach: 当前没有可附着的 post
+    no_post_to_export: 当前没有可导出的 post
+    preview_empty: 预览为空，无可复制内容
+    prompt_copied: Prompt 已复制
+    prompt_copied_submit_disabled: Prompt 已复制；提交到 imgPalace 尚未启用
+    prompt_format_warnings: 提示词包含格式警告
+    prompt_model_reference: 提示词包含不支持的模型引用
+    prompt_required: 请先填写 Prompt
+    current_img_unavailable: CurrentImg 没有可用图像，无法导出 Comfy source_image（WD14 / img2img）
+    source_image_write_failed: 'Comfy source_image 写入失败: {path}'
+    unknown_error: 未知错误
+    wd14:
+      completed: WD14 补全了 {added} 个 tag，已回灌编辑器
+  tag_export:
+    action: 操作
+    attach_img: 附着图
+    comfy_unet: Comfy UNET
+    current_img: 当前图
+    page:
+      attached: 附着 tags
+      current_img: 当前图 tags
+      fav: 收藏 tags
+  tag_translate:
+    all_translated: 所选组共 {snapshot_count} 个标签均已有译文，已跳过（跳过 {skipped_already}）
+    completed: '标签翻译完成: 成功 {ok_count}/{snapshot_count}'
+    content_existing: '{content}（已跳过已有译文 {skipped_already}）'
+    content_failed: '{content}, 失败 {fail_count}'
+    content_skipped: '{content}, 无证据跳过 {skip_count}'
+    display: '显示名:'
+    display_name: 显示名
+    display_name_saved: 已保存显示名
+    engine:
+      baidu: 百度
+      moegirlpedia: 萌娘百科
+      search_llm: 搜索引擎 + LLM
+    expand: 展开标签翻译
+    failed: '标签翻译失败: {summary}'
+    in_progress: 翻译任务进行中
+    language:
+      chinese: 中文
+      japanese: 日本語
+    no_custom_groups: 暂无自定义收藏组
+    no_tags: '所选组无标签: {selected_groups}'
+    origin: '原文:'
+    progress: 翻译中 {done}/{total}
+    provider:
+      bing: Bing
+      danbooru_wiki: Danbooru Wiki
+      google: Google
+    save_display_name: 保存当前显示名到缓存
+    select_custom_tag_first: 请先选中自定义区中的标签
+    select_group_first: 请先用组选择按钮勾选至少一个收藏组
+    select_groups_title: 选择要翻译的收藏组
+    start: 开始翻译
+    start_failed: '翻译启动失败: {exc}'
+    start_failed_running: 翻译任务未能启动（可能已在运行）
+    task_submitted: '已提交翻译任务: {group_count} 组（{group_preview}），待译 {total_tags}/{snapshot_count}'
+    translating_tags: 标签翻译中
+  viewer:
+    attach_current: 附着当前图到已打开的 Tag 导出（Attached-tags）
+    loading: 加载中...
+    no_preview: 暂无预览
+    open_export: 打开 Tag 导出面板
+  workspace:
+    label: 工作区 {tab_index}
+jsoneri:
+  gate:
+    check: 检测
+    open: 打开
+    recheck: 重新检测
+  header:
+    refresh_status: 刷新状态
+    title: Jsoneri Palaces 探针
+  service:
+    no_instance: '{service_name} 暂无可用实例'
+    report_failed: '可疑实例上报失败: {message}'
+    reported: '已上报可疑实例: {service_name}'
+    routing_failed: '服务路由失败: {message}'
+pawchive:
+  action:
+    apply_range: 按日期范围选择
+    date_range: 选择日期范围
+  author_db:
+    building_index: 正在建立全文索引（仅首次）…
+    download: 下载作者库
+    downloading: 正在下载作者库…
+    empty: 作者库为空（0 位作者）。请重新下载作者库。
+    gate_hint: 此问题与下载引擎（aria2）、redis 无关，补齐作者库后即可正常使用。
+    index_failed: '作者库索引准备失败: {error_message}'
+    invalid: 作者库文件损坏（非数据库或缺表）。请重新下载作者库。
+    missing: 作者库未下载。点击下方按钮获取预构建数据库。
+    preparing: 准备作者库
+    table_title: 作者表格
+  card:
+    download_failed: 下载失败
+    download_only: 仅可下载
+    downloading: 下载中
+    preview_error: 预览加载失败
+    reload_preview: 重新加载缩略图
+    retry: 重试
+  download:
+    failed: 下载失败：{error}
+    failed_multi: 下载失败：{errors}
+    no_url: 该附件暂无可用下载地址
+    nothing_selected: 请先选择要下载的图片
+    selected_count: 下载 {count} 张
+  env:
+    aria2_down: 下载引擎（aria2）未运行：浏览、勾选、看大图都正常，点「下载」时会自动拉起引擎；若一直失败请到设置页检查 aria2 路径与端口。
+    go_settings: 去设置
+    go_settings_hint: 请到左侧「设置」页检查 aria2 / redis 配置。
+    redis_down: 外部工具 redis 未运行：只影响命令行脚本的队列，本页的浏览与下载都不受影响。
+  error:
+    blocked: 站点拒绝了请求（UA 或限速）。请检查下载配置：每秒不超过 1 次、并发不超过 5。
+    generic: 下载失败，请重试；若反复失败，请到设置页检查代理与下载引擎。
+    network: 连不上站点：请检查网络与代理是否可用（设置页 → 网络 → 访问代理）。
+    proxy_missing: 还没有配置代理，pawchive 无法访问（本站需要代理）。请到设置页填写访问代理地址后重试。
+    retrying: 第 {attempt}/{total} 次失败，正在自动重试…
+    timeout: 请求超时（站点或代理没有响应）。请检查代理是否可用，然后点「重试」。
+    unknown_reason: 未知原因
+  favorite:
+    added: 已添加收藏
+    removed: 已取消收藏
+  filter:
+    rules_hint: 基于示例，格式严格遵循yml，过滤方式为正则匹配
+    title: 过滤规则
+    view_example: 查看📏过滤规则示例
+  grid:
+    clear_selection: 清空选择
+    collapse_post: 收起
+    count: 共 {post_count} 帖 / {image_count} 张
+    count_loading: 加载中…
+    download_selected: 下载选中
+    downloaded_progress: 已下载 {done}/{total}
+    empty_author: 该作者没有可浏览的作品
+    empty_filter: 没有匹配的图片
+    empty_post: 无附件
+    expand_post: 展开剩余 {count} 张
+    loading_more: 正在加载更多…
+    post_meta: '{published} · {count} 张'
+    select_visible: 全选本页可见
+    sort_newest: 最新
+    sort_oldest: 最早
+  open_dir:
+    button: 打开保存目录
+  open_save_dir:
+    failed: 打开保存目录失败：{error}
+    missing: 保存目录不存在：{path}。请到设置页重新选择保存目录。
+  post:
+    detail: 帖子详情
+    no_content: 该帖没有正文内容
+    non_previewable: 不可预览的下载资产（可多选）
+    tags: 标签
+  table:
+    action_label: '{action_text}「{author_name}」'
+    browse_works: 在此浏览作品
+    column:
+      author: 作者
+      avatar: 头像
+      favorites: 收藏数
+      platform: 平台
+      updated: 更新时间
+    favorite_locally: 收藏至本地
+    open_in_browser: 在浏览器打开作者页
+    search_placeholder: 搜索...
+    view_favorites: 查看本地收藏
+  viewer:
+    download: 下载本图
+    downloaded: 已下载
+    loading: 加载中
+    meta: '{service} · {published} · {width}×{height}'
+    position: 第 {index} / {total} 张
+script:
+  cache_check:
+    failed: ❌ 数据缓存检测<br>⚠️ %s 入口已隐藏，其他脚本入口仍可使用。
+    ok: ✅ 数据缓存检测
+  entry:
+    cookie:
+      hint: "获取方法: 登录后网站首页F12开控制台\n查cookies, 字段名为 `session`"
+      title: Cookie 设置
+    select_dir_title: 选择{service}存储目录
+  guide:
+    title: 脚本集指南
+  redis_missing:
+    detail: Redis 未运行，点指南看`前置须知`（%s 秒后打开可用入口）<br>缺少服务：%s｜受影响入口：%s
+  service_check:
+    failed: 服务检测失败
+    ok: ✅ 后台服务检测
+settings:
+  ai:
+    api_key: API 密钥
+    api_key_hint: Bearer token / api key
+    base_url: 接口地址
+    base_url_hint: OpenAI 兼容接口
+    key_placeholder: api-key
+    model: 模型
+    model_hint: 对话模型 id
+    model_placeholder: 模型名称
+    title: AI 服务商
+  comfy:
+    host_hint: 本机 ComfyUI 地址；留空则 Tag 导出不显示 Comfy 行
+    host_label: 地址
+  general:
+    doh: DoH
+    doh_hint: 完整 https:// 端点；留空则不使用 DoH
+    doh_invalid: DoH 地址无效
+    doh_stub_failed: 已配置 DoH，但本地 DNS stub 启动失败，本次脚本窗口的相关 DoH 功能可能不可用。
+    import_from_cgs: 从 CGS 导入配置
+    import_from_cgs_hint: 从已安装的 CGS 读取并合并现有配置、下载记录与任务快照
+    import_from_cgs_title: 从 CGS 导入
+    language: 语言
+    language_follow_system: 跟随系统
+    language_hint: 切换语言后自动重启 acggr 生效
+    proxy_example: http://127.0.0.1:7890
+    proxy_hint: 完整代理地址（含协议），留空则不使用代理
+    proxy_invalid: 代理地址无效
+    proxy_label: 访问代理
+    theme_dark: 夜间
+    theme_follow_system: 跟随系统
+    theme_hint: 跟随系统时随系统深浅色自动切换
+    theme_light: 日间
+    theme_toggle: 日间 / 夜间模式
+    title: 常规设置
+    viewer_card: 图片查看器
+  import_from_cgs:
+    already_imported: 已导入过，无新增项
+    failed: CGS 配置导入失败
+    imported: 已导入 {count} 项，即将进行重启
+    not_found: 未找到 CGS 配置
+    restart_failed: 自动重启失败，请手动关闭并重新打开 acggr
+  jsoneri:
+    storage_select: 选择存储目录
+    title: jsoneriPalaces 设置
+    token_hint: jsoneriPalacesProbe token；填写后 Tag 导出面板显示 to_ImgPalace
+    token_label: Token
+    token_placeholder: Bearer token
+    token_saved: jsoneriPalacesProbe token 已保存
+  language:
+    restart_countdown: 即将进行重启
+    restart_failed: 自动重启失败，请手动关闭并重新打开 acggr 以应用语言
+  preset:
+    expand: 展开预设
+  redis:
+    address_hint: redis 地址，pawchive 队列用；默认 127.0.0.1:6379
+    address_label: Redis 地址
+    invalid: Redis 地址格式无效，应形如 127.0.0.1:6379
+    password_hint: redis 密码，未设置密码的 redis 留空即可
+    password_label: Redis 密码
+    password_placeholder: 无密码
+    title: Redis 设置
+  save:
+    autosave_failed: 自动保存失败
+    autosaved: 已自动保存
+    failed: 配置保存失败
+    invalid_path: 路径设置无效：不能设在盘符根或CGS相关目录内
+    succeeded: 配置保存成功
+  tab:
+    general: 常规
+  update:
+    available_hint: 当前 {current} · 发布于 {date}
+    available_hint_no_date: 当前 {current}
+    available_title: 发现新版本 {version}
+    check_button: 检查更新
+    check_disabled: 更新检查已被环境变量 ACGG_NO_UPDATE_CHECK 禁用
+    check_failed: 检查更新失败，请稍后重试
+    check_hint: 当前版本 {version}
+    check_title: 版本
+    checking: 检查更新中…
+    close: 关闭
+    dialog_preview: 📫 测试版 🧪 {version}
+    dialog_stable: 📫 正式版 ⭐️ {version}
+    install_failed: 无法启动更新程序，请查看日志
+    install_now: 立即更新
+    install_unsupported: 当前为源码运行，无法自动更新，请手动更新
+    installing: 正在更新 {version}，完成后自动重启
+    notes_empty: 该版本未提供更新说明
+    notified: 发现新版本 {version}，可在设置页查看
+    skip_version: 跳过此版本
+    skipped_toast: 已跳过 {version}，下个新版本会再提示
+    up_to_date: 已是最新版本（{version}）
+    view_details: 更新详情
+website:
+  release_page:
+    inaccessible: <a href="%s">发布页</a>访问失效，<br>参考<a href="https://cgs.101114105.xyz/faq/extra">📒域名相关</a>处理[%s]

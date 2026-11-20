@@ -1,0 +1,150 @@
+"""详情浮窗的共享层（danbooru / pawchive / 未来站点）。
+
+这里只放跨站点共用的类与函数，不放任何站点业务：
+
+- chrome：ViewerChromeMixin（浮窗外壳/键位/滚轮/中键关闭的唯一实现）与共享 viewer QSS。
+- shortcuts：ViewerKeys / handle_viewer_key（统一键位语义）。
+- video_proxy：VideoProxyBase / VideoCacheSession（缓存、分段预取、Range 与进度）。
+- layout：站点无关的几何纯函数，站点禁止再各自写 196、520×340 这类魔法数。
+- settings：viewer 通用设置（显示比例 / 默认置顶）的描述表与读值入口（不持有 QWidget）。
+
+站点模块通过本包导入（``from app.GUI.viewer import ViewerChromeMixin``），不要再去
+``app.GUI.*`` 根目录找这些共享实现。
+"""
+
+from __future__ import annotations
+
+from .chrome import (
+    VIEWER_CHROME_QSS_PATH,
+    VIEWER_FRAME_OBJECT,
+    VIEWER_HINT_OBJECT,
+    VIEWER_IMAGE_OBJECT,
+    VIEWER_TOPBAR_OBJECT,
+    VIEWER_VIDEO_PANEL_OBJECT,
+    VIEWER_VIDEO_SURFACE_OBJECT,
+    ViewerChromeMixin,
+    build_viewer_chrome_stylesheet,
+    style_viewer_top_bar,
+    viewer_image_color,
+    viewer_qss_tokens,
+)
+from .loading import ImageLoadingIndicator
+from .layout import (
+    LEFT_COLUMN_WIDTH,
+    UNKNOWN_SOURCE_CANVAS,
+    ChromeExtent,
+    ViewerFitResult,
+    axis_scale,
+    chrome_extent,
+    column_width,
+    default_canvas_size,
+    fit_calculator,
+    fit_display_size,
+    fit_scale,
+    max_display_bounds,
+    media_bounds,
+    normalize_size,
+    ratio_from_percent,
+    zoom_canvas_size,
+)
+from .settings import (
+    FALLBACK_DEFAULT_PIN,
+    FALLBACK_VIEW_RATIO_PERCENT,
+    ROW_RATIO,
+    ROW_SWITCH,
+    VIEWER_SETTINGS,
+    VIEWER_SETTING_BUILDERS,
+    ViewerSetting,
+    add_viewer_setting,
+    available_viewer_settings,
+    build_viewer_settings,
+    get_viewer_setting,
+    make_viewer_setting_widget,
+    viewer_default_pin,
+    viewer_setting_item,
+    viewer_setting_value,
+    viewer_store,
+    viewer_view_ratio,
+    viewer_view_ratio_percent,
+)
+from .shortcuts import ViewerKeys, handle_viewer_key
+from .video_proxy import (
+    DEFAULT_CONTENT_TYPE,
+    PROXY_PATH_PREFIX,
+    RANGE_PROBE_HEADER,
+    STREAM_CHUNK_SIZE,
+    STREAM_TIMEOUT,
+    ClientDisconnected,
+    RangeNotSatisfiable,
+    VideoCacheProgress,
+    VideoCacheSession,
+    VideoProxyBase,
+    VideoRoute,
+    redacted_error_message,
+    safe_proxy_url,
+)
+
+__all__ = [
+    "ClientDisconnected",
+    "DEFAULT_CONTENT_TYPE",
+    "FALLBACK_DEFAULT_PIN",
+    "FALLBACK_VIEW_RATIO_PERCENT",
+    "LEFT_COLUMN_WIDTH",
+    "PROXY_PATH_PREFIX",
+    "RANGE_PROBE_HEADER",
+    "ROW_RATIO",
+    "ROW_SWITCH",
+    "RangeNotSatisfiable",
+    "STREAM_CHUNK_SIZE",
+    "STREAM_TIMEOUT",
+    "UNKNOWN_SOURCE_CANVAS",
+    "VIEWER_CHROME_QSS_PATH",
+    "VIEWER_FRAME_OBJECT",
+    "VIEWER_HINT_OBJECT",
+    "VIEWER_IMAGE_OBJECT",
+    "VIEWER_SETTINGS",
+    "VIEWER_SETTING_BUILDERS",
+    "VIEWER_TOPBAR_OBJECT",
+    "VIEWER_VIDEO_PANEL_OBJECT",
+    "VIEWER_VIDEO_SURFACE_OBJECT",
+    "ChromeExtent",
+    "ImageLoadingIndicator",
+    "ViewerChromeMixin",
+    "ViewerFitResult",
+    "ViewerKeys",
+    "ViewerSetting",
+    "VideoCacheProgress",
+    "VideoCacheSession",
+    "VideoProxyBase",
+    "VideoRoute",
+    "add_viewer_setting",
+    "available_viewer_settings",
+    "axis_scale",
+    "build_viewer_chrome_stylesheet",
+    "build_viewer_settings",
+    "chrome_extent",
+    "column_width",
+    "default_canvas_size",
+    "fit_calculator",
+    "fit_display_size",
+    "fit_scale",
+    "get_viewer_setting",
+    "handle_viewer_key",
+    "make_viewer_setting_widget",
+    "max_display_bounds",
+    "media_bounds",
+    "normalize_size",
+    "ratio_from_percent",
+    "redacted_error_message",
+    "safe_proxy_url",
+    "style_viewer_top_bar",
+    "viewer_default_pin",
+    "viewer_image_color",
+    "viewer_qss_tokens",
+    "viewer_setting_item",
+    "viewer_setting_value",
+    "viewer_store",
+    "viewer_view_ratio",
+    "viewer_view_ratio_percent",
+    "zoom_canvas_size",
+]

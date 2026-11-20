@@ -1,0 +1,26 @@
+/* Web interface tab strip QSS template and theme tokens */
+
+/* @tokens light */
+TAB_TRACK = #f5f5f5;
+TAB_TEXT = #333333;
+TAB_ACCENT = #1a73e8;
+TAB_SEPARATOR = #dcdcdc;
+/* @endtokens */
+
+/* @tokens dark */
+TAB_TRACK = #353535;
+TAB_TEXT = #e0e0e0;
+TAB_ACCENT = #4db8ff;
+TAB_SEPARATOR = #4a4a4a;
+/* @endtokens */
+
+/* @section strip */
+QFrame#WebTabStrip,
+QFrame#SettingTabStrip {
+    background: ${TAB_TRACK};
+    border: none;
+    border-bottom: 1px solid ${TAB_SEPARATOR};
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+/* @endsection */

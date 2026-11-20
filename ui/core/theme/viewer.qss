@@ -1,0 +1,121 @@
+/* Shared viewer chrome theme (danbooru / pawchive / future sites).
+ *
+ * One token set, one chrome section. Both viewers select the SAME rules here,
+ * so a theme change can never make one viewer black-bordered while the other
+ * stays light. Do not add per-site token blocks.
+ *
+ * Site-specific content (danbooru tag chips, pawchive meta labels) may live in
+ * its own qss, but the frame / image surface / hint / video surface / top bar
+ * MUST come from here.
+ */
+
+/* @tokens light */
+VIEWER_FRAME = rgba(255, 255, 255, 1.0);
+VIEWER_IMAGE = rgba(39, 39, 42, 0.04);
+TEXT = rgba(9, 9, 11, 0.97);
+MUTED_TEXT = rgba(63, 63, 70, 0.74);
+/* @endtokens */
+
+/* @tokens dark */
+VIEWER_FRAME = rgba(15, 15, 17, 1.0);
+VIEWER_IMAGE = rgba(244, 244, 245, 0.05);
+TEXT = rgba(250, 250, 250, 0.97);
+MUTED_TEXT = rgba(212, 212, 216, 0.72);
+/* @endtokens */
+
+/* @section viewer */
+/* Frame: NO visible outline in either theme (R1).
+ *
+ * The 1px border is a **layout placeholder**, not a line: a QSS border shrinks the
+ * frame's contents rect by 1px per side, so dropping it entirely would move the
+ * image surface by 1px and break the 1ceedf baseline x/y/width/height. Keep the
+ * width at 1px and set the color to ${VIEWER_FRAME} (== background) so nothing is
+ * painted on top of the frame: dark/light stay symmetric and switching cannot
+ * leave a residue ring. Do not reintroduce a contrasting border color here.
+ */
+QFrame#ViewerChromeFrame,
+QFrame#DanbooruImageViewerFrame,
+QFrame#PawchiveImageViewerFrame {
+    background: ${VIEWER_FRAME};
+    border: 1px solid ${VIEWER_FRAME};
+    border-radius: 20px;
+}
+QLabel#ViewerChromeImage,
+QLabel#DanbooruImageLabel,
+QWidget#PawchiveZoomCanvas,
+QGraphicsView#ViewerChromeImage {
+    color: ${MUTED_TEXT};
+    background: ${VIEWER_IMAGE};
+    border-radius: 16px;
+}
+QLabel#ViewerChromeHint,
+QLabel#DanbooruImageHint,
+QLabel#PawchiveImageHint {
+    color: ${MUTED_TEXT};
+    background: transparent;
+    padding: 0 18px;
+}
+QWidget#ViewerChromeVideoPanel,
+QWidget#DanbooruVideoPanel,
+QFrame#PawchiveVideoPanel {
+    background: ${VIEWER_IMAGE};
+    border-radius: 16px;
+}
+QWidget#ViewerChromeVideoSurface,
+QFrame#ViewerChromeVideoSurface,
+QGraphicsView#ViewerChromeVideoSurface,
+QWidget#DanbooruVideoSurface,
+QFrame#DanbooruVideoSurface,
+QGraphicsView#DanbooruVideoSurface,
+QWidget#PawchiveVideoSurface,
+QFrame#PawchiveVideoSurface,
+QGraphicsView#PawchiveVideoSurface {
+    background: black;
+    border-radius: 16px;
+}
+QLabel#DanbooruVideoHint,
+QLabel#PawchiveVideoHint {
+    color: ${MUTED_TEXT};
+    background: transparent;
+    padding: 0 18px;
+}
+/* Top bar: whitespace only between the buttons and the image surface (R2, not
+ * negotiable). This rule body — ``background: transparent; border: none`` — is the
+ * real guardrail, not any widget attribute: Qt flips ``WA_StyledBackground`` ON by
+ * itself as soon as this selector carries a ``background`` rule (measured:
+ * attribute False before setStyleSheet, True after). Both viewers go through
+ * ``style_viewer_top_bar()``, which now sets only the shared objectName; that
+ * matters only for the no-matching-rule case, where a styled plain QWidget paints
+ * an opaque plate instead of nothing (measured 8732/13260 px at
+ * ``(239,239,239,255)``) — how R2's stray line/plate came back before. If
+ * background/border is ever added here, decide at the same time whether a styled
+ * background is intended, or only some widgets will paint it.
+ * This is the only selector: do not add per-site names back here.
+ */
+QWidget#ViewerChromeTopBar {
+    background: transparent;
+    border: none;
+}
+/* pawchive meta column: same tokens as the chrome, no separate day/night set. */
+QLabel#PawchiveViewerPosition {
+    color: ${MUTED_TEXT};
+    font-size: 12px;
+    font-weight: 600;
+}
+QLabel#PawchiveViewerAuthor {
+    color: ${TEXT};
+    font-size: 13px;
+    font-weight: 600;
+}
+QLabel#PawchiveViewerFilename {
+    color: ${TEXT};
+    font-size: 12px;
+}
+QLabel#PawchiveViewerMeta {
+    color: ${MUTED_TEXT};
+    font-size: 12px;
+}
+QWidget#PawchiveViewerMetaPanel {
+    background: transparent;
+}
+/* @endsection */

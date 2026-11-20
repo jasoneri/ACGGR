@@ -1,0 +1,103 @@
+from __future__ import annotations
+
+import copy
+from dataclasses import dataclass
+import typing as t
+
+from core import conf
+from core.config.qc import acggr_cfg
+
+
+@dataclass(frozen=True, slots=True)
+class PreviewTransportConfig:
+    proxies: tuple[str, ...] = ()
+    doh_url: str = ""
+
+    @classmethod
+    def create(cls, *, proxies: t.Iterable[str] | None = None, doh_url: str = "") -> "PreviewTransportConfig":
+        return cls(proxies=tuple(proxies or ()), doh_url=str(doh_url or "").strip())
+
+
+@dataclass(frozen=True, slots=True)
+class PreviewRuntimeContext:
+    cookies_by_site: dict[str, dict[str, str]]
+    domains: dict[str, str]
+    custom_map: dict[str, t.Any]
+    transport: PreviewTransportConfig
+
+    @classmethod
+    def from_conf_state(cls, *, conf_state=conf, default_doh_url: str | None = None) -> "PreviewRuntimeContext":
+        fallback_doh = (
+            default_doh_url
+            if default_doh_url is not None
+            else getattr(conf_state, "doh_url", "") or acggr_cfg.doh.get_url()
+        )
+        return cls(
+            cookies_by_site={},
+            domains={},
+            custom_map=copy.deepcopy(dict(getattr(conf_state, "custom_map", {}) or {})),
+            transport=PreviewTransportConfig.create(proxies=getattr(conf_state, "proxies", None), doh_url=fallback_doh),
+        )
+
+    @staticmethod
+    def _provider_key(provider_name: str) -> str:
+        provider_key = str(provider_name or "").strip()
+        if not provider_key:
+            raise ValueError("provider_name is required")
+        return provider_key
+
+    def site_cookies(self, provider_name: str) -> dict[str, str]:
+        return copy.deepcopy(dict(self.cookies_by_site.get(self._provider_key(provider_name)) or {}))
+
+    def site_domain(self, provider_name: str) -> str | None:
+        domain = self.domains.get(self._provider_key(provider_name))
+        return str(domain).strip() if domain else None
+
+    def site_config(self, provider_name: str) -> "PreviewSiteConfig":
+        return PreviewSiteConfig(
+            cookies=self.site_cookies(provider_name),
+            domain=self.site_domain(provider_name),
+            custom_map=copy.deepcopy(self.custom_map),
+            transport=self.transport,
+        )
+
+
+@dataclass(frozen=True, slots=True)
+class PreviewSiteConfig:
+    cookies: dict[str, str]
+    domain: str | None
+    custom_map: dict[str, t.Any]
+    transport: PreviewTransportConfig
+
+    @classmethod
+    def create(
+        cls,
+        provider_name: str,
+        *,
+        cookies_by_site: t.Mapping[str, t.Mapping[str, str]] | None = None,
+        domains: t.Mapping[str, str] | None = None,
+        custom_map: t.Mapping[str, t.Any] | None = None,
+        proxies: t.Iterable[str] | None = None,
+        doh_url: str = "",
+    ) -> "PreviewSiteConfig":
+        provider_key = str(provider_name or "").strip()
+        if not provider_key:
+            raise ValueError("provider_name is required")
+        site_cookies = (cookies_by_site or {}).get(provider_key)
+        site_domain = (domains or {}).get(provider_key)
+        return cls(
+            cookies=copy.deepcopy(dict(site_cookies or {})),
+            domain=str(site_domain).strip() if site_domain else None,
+            custom_map=copy.deepcopy(dict(custom_map or {})),
+            transport=PreviewTransportConfig.create(proxies=proxies, doh_url=doh_url),
+        )
+
+    def as_provider_kwargs(self) -> dict[str, t.Any]:
+        kwargs = {"transport": self.transport}
+        if self.cookies:
+            kwargs["cookies"] = copy.deepcopy(self.cookies)
+        if self.domain:
+            kwargs["domain"] = self.domain
+        if self.custom_map:
+            kwargs["custom_map"] = copy.deepcopy(self.custom_map)
+        return kwargs

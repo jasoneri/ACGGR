@@ -1,0 +1,218 @@
+name: Release
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+jobs:
+  validate-and-publish-pypi:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v4
+      with:
+        enable-cache: false
+
+    - name: Verify tag matches package version
+      if: github.event_name != 'workflow_dispatch' && github.ref_type == 'tag'
+      run: |
+        # core/variables.py::__version__ is the single source of truth for the
+        # wheel version. Read it as text: no import, no Qt, no config writes.
+        # The step-level if already skips workflow_dispatch on Actions; this
+        # guard also makes the raw run block safe to simulate locally.
+        if [ "${GITHUB_EVENT_NAME:-}" = "workflow_dispatch" ] || [ "${GITHUB_REF_TYPE:-}" != "tag" ]; then
+          echo "non-tag ref: skip tag/version check"
+          exit 0
+        fi
+        version=$(sed -n 's/^__version__[[:space:]]*=[[:space:]]*"\([^"]*\)".*/\1/p' core/variables.py | head -n1)
+        tag="${GITHUB_REF_NAME#v}"
+        echo "tag=$tag version=$version"
+        if [ -z "$version" ]; then
+          echo "::error::__version__ not found in core/variables.py" >&2
+          exit 1
+        fi
+        if [ "$tag" != "$version" ]; then
+          echo "::error::tag=$tag does not match __version__=$version (core/variables.py); bump __version__ before tagging" >&2
+          exit 1
+        fi
+        echo "tag/version match: $version"
+
+    - name: Build package
+      run: uv build
+
+    - name: Install Qt runtime libs for smoke test
+      uses: tlambert03/setup-qt-libs@v1
+
+    - name: Smoke test wheel before publish
+      env:
+        QT_QPA_PLATFORM: offscreen
+        ACGG_CHECK_MODE: "1"
+        LOCALAPPDATA: ${{ runner.temp }}/acggr_la
+        XDG_CONFIG_HOME: ${{ runner.temp }}/acggr_xdg
+      run: |
+        uv venv .venv-smoke
+        source .venv-smoke/bin/activate
+        uv pip install dist/*.whl
+        uv run .github/scripts/smoke_wheel.py
+
+    - name: Publish to PyPI
+      run: uv publish
+
+  create-release:
+    needs: validate-and-publish-pypi
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+
+    - name: Compose Release Notes
+      id: compose_notes
+      run: |
+        TAG_NAME="${GITHUB_REF#refs/tags/}"
+        echo "version: $TAG_NAME"
+        base=$(cat docs/_github/release_notes.md)
+
+        case "$TAG_NAME" in
+          *beta*)
+            extra=$(cat docs/_github/preset_preview.md)
+            echo "is_beta=true" >> $GITHUB_OUTPUT
+            ;;
+          *)
+            extra=$(cat docs/_github/preset_stable.md)
+            echo "is_beta=false" >> $GITHUB_OUTPUT
+            ;;
+        esac
+
+        # printf, not `echo "$base\n$extra"`: bash's builtin echo does not expand
+        # \n without -e, so the literal two characters ended up in the release
+        # body -- which the in-app update dialog now renders verbatim.
+        printf '%s\n\n%s\n' "$base" "$extra" > /tmp/full_body.md
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ github.ref }}
+        name: ${{ github.ref_name }}
+        prerelease: ${{ steps.compose_notes.outputs.is_beta == 'true' }}
+        body_path: /tmp/full_body.md
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-update-feed:
+    # Same run as the release, and inlined rather than `uses:` a reusable
+    # workflow, for two independent reasons:
+    #   1. a release created with the repo's GITHUB_TOKEN does not emit a
+    #      cascading `release` event, so an event-triggered job never fires on a
+    #      normal tag push;
+    #   2. `.github/workflows/publish-update-feed.yml` is hidden from plain
+    #      `git add` by a developer-level global ignore (`.*/`), so `uses:` would
+    #      point at a file CI may not have.
+    # The standalone workflow remains for manual backfill/rollback of a tag.
+    if: github.ref_type == 'tag'
+    needs: create-release
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Fetch release body and timestamp
+        id: notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          # `gh api` failure is fatal on purpose: an empty body would silently
+          # publish a feed without notes, which looks like a client bug later.
+          gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${GITHUB_REF_NAME}" > "$RUNNER_TEMP/release.json"
+          python3 - "$RUNNER_TEMP" <<'PY'
+          import json, os, pathlib, sys
+
+          work = pathlib.Path(sys.argv[1])
+          data = json.loads((work / "release.json").read_text(encoding="utf-8"))
+          body = data.get("body") or ""
+          (work / "body.md").write_text(body, encoding="utf-8")
+          published_at = data.get("published_at") or ""
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
+              fh.write(f"published_at={published_at}\n")
+          print(f"body_chars={len(body)} published_at={published_at}")
+          PY
+
+      - name: Compose feed
+        env:
+          PUBLISHED_AT: ${{ steps.notes.outputs.published_at }}
+        run: |
+          set -euo pipefail
+          python3 deploy/scripts/compose_update_feed.py \
+            --tag "$GITHUB_REF_NAME" \
+            --body-file "$RUNNER_TEMP/body.md" \
+            --published-at "$PUBLISHED_AT" \
+            --repo "$GITHUB_REPOSITORY" \
+            --output "$RUNNER_TEMP/update.json"
+
+      - name: Ensure the permanent updater release exists
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if gh release view updater >/dev/null 2>&1; then
+            echo "updater release already exists"
+          else
+            # Created once; every later run clobbers only update.json. Releases
+            # created with GITHUB_TOKEN do not cascade `release published`
+            # events, so this cannot re-enter the workflow.
+            gh release create updater \
+              --title "updater" \
+              --notes "Machine-readable update feed for shipped clients. Do not delete: update.json is polled at a fixed URL." \
+              --latest=false
+          fi
+
+      - name: Upload feed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          gh release upload updater "$RUNNER_TEMP/update.json" --clobber
+
+      - name: Verify the public feed
+        run: |
+          set -euo pipefail
+          url="https://github.com/${GITHUB_REPOSITORY}/releases/download/updater/update.json"
+          # The asset CDN can lag a few seconds behind the API; retry instead of
+          # reporting a red build for a cache miss.
+          for attempt in 1 2 3 4 5; do
+            if curl -fsSL --retry 2 --retry-delay 2 "$url" -o "$RUNNER_TEMP/public.json"; then
+              break
+            fi
+            echo "attempt ${attempt}: feed not reachable yet"
+            sleep 3
+          done
+          test -s "$RUNNER_TEMP/public.json"
+          python3 - "$RUNNER_TEMP/public.json" "$GITHUB_REF_NAME" <<'PY'
+          import json, pathlib, sys
+
+          data = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+          required = {"version", "channel", "published_at", "notes", "release_url"}
+          missing = sorted(required - data.keys())
+          assert not missing, f"feed missing keys: {missing}"
+          tag = sys.argv[2].lstrip("vV")
+          assert data["version"] == tag, f"feed version {data['version']!r} != tag {tag!r}"
+          assert data["channel"] in {"stable", "preview"}, f"bad channel {data['channel']!r}"
+          print(f"feed ok: version={data['version']} channel={data['channel']}")
+          PY
+          echo "feed published for ${GITHUB_REF_NAME}: $url"

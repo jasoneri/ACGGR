@@ -1,0 +1,547 @@
+# acggr en_US wording table -- the only translation file in the repository.
+#
+# Keys are semantic IDs, qtTrId()-style: <feature>.<widget>.<element>. They are
+# stable English identifiers, so a wording can be rewritten without touching
+# code, and a translator never reads a foreign sentence as a key.
+#
+# Compiled at runtime: `res.i18n` turns this file into an id-based .ts, runs
+# PySide6's own lrelease on it and loads the .qm through a plain QTranslator.
+# Nothing compiled is ever committed. `res/i18n/build.py --check` reports IDs
+# used in code but missing here, and keys no qtTrId() call uses any more.
+
+aria2:
+  ariang:
+    download_failed: 'AriaNg download failed: {error}'
+    downloading: Downloading AriaNg from preset release…
+    file_missing: 'Download complete but file missing: {path}'
+    not_downloaded: AriaNg page not downloaded yet (fetched automatically from preset release on first visit)
+    ready:
+      instance_unreadable: Ready · aria2 instance record unreadable
+      not_running: Ready · aria2 not running (panel opens showing disconnected)
+      rpc: Ready · aria2 RPC 127.0.0.1:{port}
+  config:
+    download_proxy: Download proxy
+    download_proxy_hint: Applies to aria2 download tasks only; HTTP(S) proxy
+    keep_history: Download history (rows)
+    keep_history_hint: Keep only the latest N rows; 0 disables history
+    proxy_placeholder: http://127.0.0.1:7890
+    title: Aria2 download engine
+ariang:
+  title: AriaNg
+browser:
+  address:
+    placeholder: Enter a URL and press Return
+  challenge:
+    continue: Continue request
+  cloudflare:
+    hint: "Cloudflare verification needs manual interaction. Please wait patiently (refresh if the page stays blank).\nWhen the home page appears, the app will return automatically. Do not close the built-in browser manually."
+  devtools:
+    title: DevTools
+  download:
+    completed: 'Download complete: {path}'
+    interrupted: 'Download interrupted: {reason}'
+    select_path: Select save location
+    started: 'Download started: {name}'
+    unknown_reason: Unknown reason
+  page:
+    preview_failed: The page script returned an error; refresh the preview and retry
+    preview_not_ready: Preview script is not ready yet; try again shortly
+  title:
+    inner: inner browser
+  toolbar:
+    always_on_top: WindowStaysOnTopHint
+    back: back
+    copied: Link copied
+    copy_unfinished: copy unfinished
+    download_selected: download selected
+    forward: forward
+    home: home
+    refresh: refresh page
+cbg:
+  api:
+    hint: Get an API from the 引力圈 sponsor plan and paste it here..
+    importing: Importing the API bundle…
+    paste_first: Paste an API link first
+    reading_remote: Reading remote data…
+  import:
+    apply_to_cgs: Apply to cgs bg_path?
+    done: Import complete; switched to new directory
+    include_previous: Include previous
+  path:
+    cards_hint: Cards will appear here after selecting a PNG directory
+    png_directory: PNG directory
+    select_directory: Select Cbg PNG directory
+  userscript:
+    copied: Copied to clipboard; import into a browser userscript.
+    firefox_hint: (Firefox requires enabling `Allow access to file URLs` in the extension.)
+common:
+  action:
+    cancel: Cancel
+    not_selected: Not selected
+  error:
+    log_detail: '{summary}. See log: {log_path}'
+  example_prefix: e.g.
+  menu:
+    paste: Paste
+    select_all: Select all
+  save_path:
+    select: Select directory
+    title: Save path
+  select:
+    box_hint: Left-drag to box-select; right-click to clear selection
+  task:
+    cancelled: Task cancelled
+    completed: Task completed
+    done: Done
+    please_wait: Please wait
+    processing: Processing...
+    repeat_suffix: (×{count})
+    running: Task '{task_id}' is already running
+    start_failed: Failed to start the task
+  warning:
+    title: Warning
+danbooru:
+  action:
+    merge_folders: Merge folders
+  card:
+    preview_error: Preview Error
+    video_preview: Video Preview
+  challenge:
+    title: Danbooru Verification
+  config:
+    concurrency: Download Concurrency
+    concurrency_hint: Download task concurrency
+    display_scale: Display Scale
+    display_scale_hint: Control preview viewer area
+    viewer_source_mode: Display Clarity
+    viewer_source_mode_hint: Auto picks by measured speed; you can pin Original or Thumbnail
+    viewer_source_mode_auto: Auto
+    viewer_source_mode_on: Original
+    viewer_source_mode_off: Thumbnail
+    hide_unpreviewable: Hide Unpreviewable
+    hide_unpreviewable_hint: Skip list entries with no renderable content; viewer previous/next follows
+    save_mode:
+      by_search_tag: By Search Tag
+      default: Default
+      title: Save Mode
+    save_mode_hint: Save to the root directory or create subfolders by search tag
+    select_dir_title: Select Danbooru save directory
+    title: Danbooru Config
+    viewer_default_pin: Default Pin
+    viewer_default_pin_hint: Open the image viewer with pin (always on top) checked
+  export:
+    ai_merge: AI Merge Prompt
+    clear_attached: Clear attached image (Attached-tags)
+    comfy_queue: Comfy task queue
+    complete_from_image: Complete from image
+    copy_prompt: Copy Prompt
+    denoise_strength: Denoise strength
+    denoise_strength_hint: 'Denoise strength: turbo needs ≥85% to change content; base / aesthetic take effect at about 60%.'
+    describe_change: Describe what you want to change
+    deselect_all: Deselect all
+    detecting_wd14: Detecting WD14 nodes…
+    format_prompt: Format Prompt
+    no_image_attached: No image attached
+    no_usable_tags: The attached item has no usable tags
+    prompt_preview: Prompt preview
+    restore_defaults: Restore defaults (General)
+    select_all: Select all
+    title: Tag Export
+    wd14_hint: Let WD14 fill in danbooru tags missing from the image itself
+  fav_chips:
+    insert_into: Insert into
+    search_group: Search this group's tags
+    section:
+      artist: Artist (artist)
+      body: General (body)
+      character: Character (character)
+      series: Series (series)
+  favorites:
+    custom_section: Custom section
+    default_group: Default favorites
+    default_section: Default section
+    delete_group_or_tag: Delete selected group or tag
+    delete_tag: Delete selected tag
+    group_delete_default: The default favorite group cannot be deleted
+    group_exists: 'Favorite group already exists: {name}'
+    group_missing: 'Favorite group does not exist: {name}'
+    group_name_empty: Favorite group name cannot be empty
+    group_name_reserved: 'Favorite group name cannot be {name}'
+    group_rename_default: The default favorite group cannot be renamed
+    move_to: 'Move to:'
+    save: Save favorites
+    select_custom_first: Select a group or tag in the custom section first
+    select_default_tag_first: Select a tag in the default section first
+    tag: tag
+    target_group: 'target group:'
+  interface:
+    jsoneri_unavailable: jsoneriPalaces is not loaded; cannot open imgPalace
+  jobs:
+    cancel_failed: 'Failed to cancel Comfy task: {error}'
+    cancelled: Cancelled
+    clipboard_unavailable: System clipboard is unavailable
+    empty: No tasks
+    export_panel_unavailable: Tag Export panel is unavailable; cannot attach
+    failed: Failed
+    image_missing: Image missing
+    load_image_failed: 'Could not load the output image: {error}'
+    moved_to_del: 'Moved to .del and removed the record: {moved_path_name}'
+    no_local_snapshot: This task has no local snapshot (only tasks submitted via acggr can be attached)
+    no_prompt_snapshot: This task has no Prompt snapshot to copy
+    offline_restored: 'Comfy is unavailable; restored task cards locally: {remote_error}'
+    open_image_failed: 'Could not open the output image: {error}'
+    open_output_dir_failed: 'Could not open the Comfy output folder: {error}'
+    output_missing: Output image no longer exists (it may have been cleaned up)
+    output_missing_404: Output image no longer exists (Comfy returned 404)
+    prompt_copied: Task Prompt copied
+    record_delete_failed: 'Task record removed, but moving it to .del failed: {delete_error}'
+    record_removed: Task record removed (the local output image is missing or cannot be located)
+    refresh_failed: 'Failed to refresh Comfy tasks: {error}'
+    tags_attached: Attached generated-image tags and restored generation settings (Prompt preview unchanged)
+    title: Comfy Tasks
+  pagination:
+    hint_home: 'Home results are very large: add tags before jumping deep; the range is limited by a soft cap'
+    hint_large: '{total} pages total (site cap {cap}); deep pages may be slow'
+    hint_pending: 'Total page count is not ready yet; enter a page number to try jumping'
+    hint_total: '{total} pages total'
+    invalid: Enter a valid page number
+    jump: Jump
+    out_of_range: Page number out of range (max {target_page})
+    page: Page
+    soft_cap: Home-page deep jump is limited by a soft cap (up to p{target_page}). Add tags before jumping again.
+  preview:
+    decode_failed: Image decode failed
+    decode_failed_hint: The image data is not a valid format or is corrupted
+    failed: '{media_hint} preview failed'
+    failed_detail: '{media_hint} preview failed: {first_line}'
+    failed_label: fail/Preview failed
+    failed_label_detail: 'fail/Preview failed: {first_line}'
+    not_an_image: Response is not a renderable image ({media_hint})
+    not_renderable: '{media_hint} preview cannot be rendered; download the original / non-renderable preview'
+    unavailable: No preview available for this work / non preview
+    unknown_format: Unknown format
+    zip_original: ZIP original; preview asset can be shown, but the original still needs downloading / ZIP original, preview asset
+  search:
+    empty_query_home: Empty search opens the home page
+    extra_placeholder: e.g. score:>50
+    placeholder: 'such as: blue_archive'
+    verification_required: Verification required
+  sort:
+    default: Default
+    oldest: Oldest
+    score: Score
+  tab:
+    clear_before_page: Clear images before this page
+    clear_selection: Clear selection
+    close: Close
+    completion_empty: No matches
+    favorite_groups: Favorite groups
+    no_favorites: No favorites
+    open_history: Open history
+    pin: Pin tab
+    pin_list: Pinned tabs
+    unpin: Unpin tab
+  tag:
+    translating: Translating
+  tag_action:
+    ai_merge_failed: 'AI Prompt merge failed: {summary}'
+    ai_merged: AI merged the Prompt
+    ai_merging: Merging AI Prompt
+    ai_updating_editor: Updating the editor from the natural-language instruction
+    anima:
+      cancelled: ANIMA [{preset}] cancelled
+      generate_failed: 'ANIMA image generation failed: {tail} (full stack trace in the log)'
+      generated: ANIMA [{preset}] finished generating {image_count} images
+      not_ready: imgPalace is not ready; configure jsoneriPalaces first
+      submit_failed: 'ANIMA submission failed: {error} (full stack trace in the log)'
+      submitted: ANIMA [{preset}] submitted; see the button and task panel for progress
+    attached_current_image: Attached the current image to Attached-tags
+    comfy:
+      host_missing: Comfy host is not configured (Script Settings → ComfyUI)
+      notes: Comfy configuration notes
+      queued: Queued · {preset}
+      running: Running
+    export_panel_required: Open the Tag Export panel before attaching
+    no_post_to_attach: No post is available to attach
+    no_post_to_export: No post is available to export
+    preview_empty: The preview is empty; nothing to copy
+    prompt_copied: Prompt copied
+    prompt_copied_submit_disabled: Prompt copied; submission to imgPalace is not enabled yet
+    prompt_format_warnings: Prompt contains format warnings
+    prompt_model_reference: Prompt contains an unsupported model reference
+    prompt_required: Enter a Prompt first
+    current_img_unavailable: CurrentImg has no usable image; cannot export a Comfy source_image (WD14 / img2img)
+    source_image_write_failed: 'Failed to write Comfy source_image: {path}'
+    unknown_error: Unknown error
+    wd14:
+      completed: WD14 added {added} tags and wrote them back to the editor
+  tag_export:
+    action: Action
+    attach_img: AttachImg
+    comfy_unet: Comfy UNET
+    current_img: CurrentImg
+    page:
+      attached: Attached-tags
+      current_img: CurrentImg-tags
+      fav: Fav-tags
+  tag_translate:
+    all_translated: All {snapshot_count} tags in the selected groups already have translations; skipped ({skipped_already} skipped)
+    completed: 'Tag translation complete: {ok_count}/{snapshot_count} succeeded'
+    content_existing: '{content} (skipped {skipped_already} with existing translations)'
+    content_failed: '{content}, {fail_count} failed'
+    content_skipped: '{content}, skipped {skip_count} with no evidence'
+    display: 'display:'
+    display_name: Display name
+    display_name_saved: Display name saved
+    engine:
+      baidu: Baidu
+      moegirlpedia: Moegirlpedia
+      search_llm: Search engine + LLM
+    expand: Expand tag translation
+    failed: 'Tag translation failed: {summary}'
+    in_progress: Translation task in progress
+    language:
+      chinese: Chinese
+      japanese: Japanese
+    no_custom_groups: No custom favorite groups
+    no_tags: 'The selected groups have no tags: {selected_groups}'
+    origin: 'origin:'
+    progress: Translating {done}/{total}
+    provider:
+      bing: Bing
+      danbooru_wiki: Danbooru Wiki
+      google: Google
+    save_display_name: Save the current display name to the cache
+    select_custom_tag_first: Select a tag in the custom section first
+    select_group_first: Use the group selection button to select at least one favorite group first
+    select_groups_title: Select favorite groups to translate
+    start: Start translation
+    start_failed: 'Failed to start translation: {exc}'
+    start_failed_running: The translation task could not start (it may already be running)
+    task_submitted: 'Submitted translation task: {group_count} groups ({group_preview}); {total_tags}/{snapshot_count} tags to translate'
+    translating_tags: Translating tags
+  viewer:
+    attach_current: Attach current image to the open Tag export (Attached-tags)
+    loading: Loading...
+    no_preview: No Preview
+    open_export: Open Tag export panel
+  workspace:
+    label: Workspace {tab_index}
+jsoneri:
+  gate:
+    check: Check
+    open: Open
+    recheck: Recheck
+  header:
+    refresh_status: Refresh status
+    title: Jsoneri Palaces Probe
+  service:
+    no_instance: '{service_name} has no available instance'
+    report_failed: 'Suspicious instance report failed: {message}'
+    reported: 'Suspicious instance reported: {service_name}'
+    routing_failed: 'Service routing failed: {message}'
+pawchive:
+  action:
+    apply_range: Select by date range
+    date_range: Select date range
+  author_db:
+    building_index: Building full-text index (first time only)…
+    download: Download author database
+    downloading: Downloading author database…
+    empty: Author database is empty. Please re-download.
+    gate_hint: This is unrelated to the download engine (aria2) and redis; once the author database is available the page works normally.
+    index_failed: 'Author database index preparation failed: {error_message}'
+    invalid: Author database is invalid (not a database or missing tables). Please re-download.
+    missing: Author database not downloaded. Click below to fetch the prebuilt database.
+    preparing: Preparing author database
+    table_title: Author table
+  card:
+    download_failed: Download failed
+    download_only: Download only
+    downloading: Downloading
+    preview_error: Preview failed
+    reload_preview: Reload thumbnail
+    retry: Retry
+  download:
+    failed: 'Download failed: {error}'
+    failed_multi: 'Download failed: {errors}'
+    no_url: No download URL for this attachment
+    nothing_selected: Select images first
+    selected_count: Download {count}
+  env:
+    aria2_down: 'Download engine (aria2) is not running: browsing, selecting and previewing still work; the engine starts automatically when you click Download. If it keeps failing, check the aria2 path and port in Settings.'
+    go_settings: Open settings
+    go_settings_hint: Check the aria2 / redis configuration in Settings.
+    redis_down: 'External redis is not running: this only affects the command-line script queue; browsing and downloading on this page are unaffected.'
+  error:
+    blocked: Site rejected the request (UA or rate limit).
+    generic: Download failed. Try again; if it keeps failing, check the proxy and download engine in Settings.
+    network: Cannot reach the site. Check your network and proxy (Settings → Network → Proxy).
+    proxy_missing: No proxy configured, so pawchive cannot reach the site. Set the proxy address in Settings and retry.
+    retrying: Attempt {attempt}/{total} failed, retrying automatically...
+    timeout: Request timed out (site or proxy not responding). Check the proxy, then click Retry.
+    unknown_reason: Unknown reason
+  favorite:
+    added: Added to favorites
+    removed: Removed from favorites
+  filter:
+    rules_hint: Follow the example; strict YAML format, regex matching
+    title: Filter rules
+    view_example: View 📏 filter rule example
+  grid:
+    clear_selection: Clear selection
+    collapse_post: Collapse
+    count: '{post_count} posts / {image_count} images'
+    count_loading: Loading…
+    download_selected: Download selected
+    downloaded_progress: '{done}/{total} downloaded'
+    empty_author: No works for this author
+    empty_filter: No matching images
+    empty_post: No attachments
+    expand_post: Show {count} more
+    loading_more: Loading more…
+    post_meta: '{published} · {count} images'
+    select_visible: Select visible
+    sort_newest: Newest
+    sort_oldest: Oldest
+  open_dir:
+    button: Open save folder
+  open_save_dir:
+    failed: 'Could not open the save folder: {error}'
+    missing: 'Save folder does not exist: {path}. Pick the save folder again in Settings.'
+  post:
+    detail: Post details
+    no_content: This post has no text content
+    non_previewable: Non-previewable download assets (multi-select)
+    tags: Tags
+  table:
+    action_label: '{action_text}「{author_name}」'
+    browse_works: Browse works here
+    column:
+      author: Author
+      avatar: Avatar
+      favorites: Favorites
+      platform: Platform
+      updated: Updated
+    favorite_locally: Favorite locally
+    open_in_browser: Open author page in browser
+    search_placeholder: Search...
+    view_favorites: View local favorites
+  viewer:
+    download: Download this image
+    downloaded: Downloaded
+    loading: Loading
+    meta: '{service} · {published} · {width}×{height}'
+    position: '{index} / {total}'
+script:
+  cache_check:
+    failed: ❌ Data cache check<br>⚠️ The %s entry is hidden; other script entries remain available.
+    ok: ✅ Data cache check
+  entry:
+    cookie:
+      hint: 'How to get it: sign in, open DevTools (F12) and read the `session` cookie'
+      title: Cookies
+    select_dir_title: Select {service} save directory
+  guide:
+    title: Script guide
+  redis_missing:
+    detail: 'Redis is not running. See the guide. (Available entries open in %s seconds)<br>Missing services: %s｜Affected entries: %s'
+  service_check:
+    failed: Service check failed
+    ok: ✅ Service check
+settings:
+  ai:
+    api_key: API Key
+    api_key_hint: Bearer token / api key
+    base_url: Base URL
+    base_url_hint: OpenAI-compatible endpoint
+    key_placeholder: api-key
+    model: Model
+    model_hint: Chat model id
+    model_placeholder: model name
+    title: AI Provider
+  comfy:
+    host_hint: Local ComfyUI address; leave it empty to hide the Comfy rows in Tag Export
+    host_label: Host
+  general:
+    doh: DoH
+    doh_hint: Full https:// endpoint; leave it empty to disable DoH
+    doh_invalid: Invalid DoH address
+    doh_stub_failed: DoH is configured, but the local DNS stub failed to start; DoH features in this script window may be unavailable.
+    import_from_cgs: Import from CGS
+    import_from_cgs_hint: Read and merge the configuration, download history and job snapshots of an installed CGS
+    import_from_cgs_title: Import from CGS
+    language: Language
+    language_follow_system: Follow system
+    language_hint: acggr restarts automatically to apply a language change
+    proxy_example: http://127.0.0.1:7890
+    proxy_hint: Full proxy URL including the scheme; leave it empty for no proxy
+    proxy_invalid: Invalid proxy address
+    proxy_label: Proxy
+    theme_dark: Dark
+    theme_follow_system: Follow system
+    theme_hint: Follow system switches with the OS light/dark setting
+    theme_light: Light
+    theme_toggle: Light / dark mode
+    title: General
+    viewer_card: Image Viewer
+  import_from_cgs:
+    already_imported: Already imported; nothing new
+    failed: CGS configuration import failed
+    imported: Imported {count} item(s); restarting acggr
+    not_found: No CGS configuration found
+    restart_failed: Automatic restart failed; close and reopen acggr manually
+  jsoneri:
+    storage_select: Select storage directory
+    title: jsoneriPalaces settings
+    token_hint: jsoneriPalacesProbe token; when set, the Tag Export panel shows to_ImgPalace
+    token_label: Token
+    token_placeholder: Bearer token
+    token_saved: jsoneriPalacesProbe token saved
+  language:
+    restart_countdown: Restarting acggr
+    restart_failed: Could not restart automatically. Close and reopen acggr to apply the language.
+  preset:
+    expand: Show presets
+  redis:
+    address_hint: Redis address used by the pawchive queue; defaults to 127.0.0.1:6379
+    address_label: Redis address
+    invalid: Invalid Redis address; expected host:port such as 127.0.0.1:6379
+    password_hint: Redis password; leave empty when the server has no auth
+    password_label: Redis password
+    password_placeholder: No password
+    title: Redis settings
+  save:
+    autosave_failed: Autosave failed
+    autosaved: Saved
+    failed: Could not save the configuration
+    invalid_path: 'Invalid path: it cannot be a drive root or inside the CGS directory'
+    succeeded: Configuration saved
+  tab:
+    general: General
+  update:
+    available_hint: Current {current} · released {date}
+    available_hint_no_date: Current {current}
+    available_title: Version {version} available
+    check_button: Check for updates
+    check_disabled: Update checks are disabled by ACGG_NO_UPDATE_CHECK
+    check_failed: Update check failed; try again later
+    check_hint: Current version {version}
+    check_title: Version
+    checking: Checking…
+    close: Close
+    dialog_preview: 📫 Preview 🧪 {version}
+    dialog_stable: 📫 Stable ⭐️ {version}
+    install_failed: Could not start the updater; see the log
+    install_now: Update now
+    install_unsupported: Running from a source checkout; update manually
+    installing: Installing {version}; the app restarts when done
+    notes_empty: No release notes for this version
+    notified: Version {version} is available; open Settings to view it
+    skip_version: Skip this version
+    skipped_toast: Skipped {version}; the next release will prompt again
+    up_to_date: Up to date ({version})
+    view_details: What is new
+website:
+  release_page:
+    inaccessible: <a href="%s">Release page</a> inaccessible<br>Refer to📒Extra Notes Section 2 for [%s] resolution

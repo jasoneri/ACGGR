@@ -1,0 +1,325 @@
+/* pawchive QSS template and theme tokens.
+ *
+ * 独立文件，不往 danbooru.qss 里塞段：`render_templated_qss_section` 按 section
+ * 名取模板，两个站点共用必然同名冲突（05 §2.7 两条铁律）。
+ *
+ * 段名：card / post_group / grid_toolbar / page_nav / bottom_bar / viewer。
+ * 令牌段名必须与 theme_mgr 的 "light" / "dark" 对齐（qss_template 按主题名取）。
+ */
+
+/* @tokens light */
+CANVAS = #f5f5f4;
+SHELL = rgba(250, 250, 249, 0.98);
+SHELL_BORDER = rgba(39, 39, 42, 0.10);
+TEXT = rgba(9, 9, 11, 0.97);
+MUTED_TEXT = rgba(63, 63, 70, 0.74);
+CARD_BACKGROUND_IDLE = rgba(255, 255, 255, 0.99);
+CARD_BORDER_IDLE = rgba(39, 39, 42, 0.10);
+CARD_HOVER_BORDER_IDLE = rgba(39, 39, 42, 0.26);
+CARD_BACKGROUND_DOWNLOADED = rgba(255, 160, 122, 0.44);
+CARD_BORDER_DOWNLOADED = rgba(216, 110, 72, 0.76);
+CARD_HOVER_BORDER_DOWNLOADED = rgba(216, 110, 72, 0.92);
+CARD_PREVIEW_BACKGROUND = rgba(39, 39, 42, 0.05);
+CARD_PREVIEW_BACKGROUND_HOVER = rgba(39, 39, 42, 0.09);
+CARD_PREVIEW_UNSUPPORTED_TEXT = #b65239;
+CARD_SELECTION_BORDER = rgba(123, 90, 206, 0.74);
+CARD_SELECTION_FILL_START = rgba(65, 88, 208, 0.16);
+CARD_SELECTION_FILL_MID = rgba(200, 80, 192, 0.14);
+CARD_SELECTION_FILL_END = rgba(255, 204, 112, 0.22);
+CARD_PREVIEW_SELECTED_BORDER = rgba(255, 255, 255, 0.24);
+CARD_PREVIEW_SELECTED_OVERLAY_START = rgba(255, 255, 255, 0.28);
+CARD_PREVIEW_SELECTED_OVERLAY_END = rgba(255, 255, 255, 0.08);
+CARD_PREVIEW_DOWNLOADED_GRAYSCALE = 1.0;
+CARD_PREVIEW_DOWNLOADED_OPACITY = 0.6;
+CARD_GLOW_COLOR = rgba(255, 190, 184, 0.88);
+CARD_CHECKBOX_OPACITY = 0.25;
+CARD_CHECKBOX_DISABLED_OPACITY = 0.25;
+CARD_CHECKBOX_GRADIENT_START = #a7abc0;
+CARD_CHECKBOX_GRADIENT_MID = #a39aa3;
+CARD_CHECKBOX_GRADIENT_END = #afa695;
+CARD_CHECKBOX_SHADOW = rgba(255, 190, 184, 144);
+CARD_CHECKBOX_INNER = rgba(255, 255, 255, 252);
+CARD_CHECKBOX_OFFSET_X = 12;
+CARD_CHECKBOX_OFFSET_Y = 12;
+CARD_VIDEO_BADGE_BG = rgba(0, 0, 0, 0.62);
+CARD_VIDEO_BADGE_TEXT = rgba(255, 255, 255, 0.92);
+CARD_PROGRESS_PLATE = rgba(0, 0, 0, 0.45);
+CARD_PROGRESS_TRACK = rgba(255, 255, 255, 0.36);
+CARD_PROGRESS_ARC = #4db8ff;
+CARD_PROGRESS_FAILED = #C42B1C;
+GROUP_BACKGROUND = rgba(245, 245, 244, 0.97);
+GROUP_BORDER = rgba(39, 39, 42, 0.08);
+GROUP_HEADER_TEXT = rgba(9, 9, 11, 0.97);
+GROUP_HEADER_MUTED = rgba(63, 63, 70, 0.74);
+GROUP_HIGHLIGHT = rgba(123, 90, 206, 0.22);
+TOOLBAR_BACKGROUND = rgba(250, 250, 249, 0.98);
+TOOLBAR_BORDER = rgba(39, 39, 42, 0.10);
+TOOLBAR_MUTED = rgba(63, 63, 70, 0.74);
+SELECTION_BORDER = rgba(24, 24, 27, 0.88);
+SELECTION_BACKGROUND = rgba(100, 181, 246, 0.18);
+PAGE_NAV_FAB_BG = rgba(250, 250, 249, 0.98);
+PAGE_NAV_FAB_FG = rgba(63, 63, 70, 0.92);
+PAGE_NAV_FAB_BORDER = rgba(39, 39, 42, 0.12);
+PAGE_NAV_FAB_HOVER_BORDER = rgba(120, 100, 110, 0.28);
+PAGE_NAV_FAB_SHADOW = rgba(39, 39, 42, 0.10);
+/* @endtokens */
+
+/* @tokens dark */
+CANVAS = #09090b;
+SHELL = rgba(18, 18, 20, 0.98);
+SHELL_BORDER = rgba(244, 244, 245, 0.10);
+TEXT = rgba(250, 250, 250, 0.97);
+MUTED_TEXT = rgba(212, 212, 216, 0.72);
+CARD_BACKGROUND_IDLE = rgba(24, 24, 27, 0.98);
+CARD_BORDER_IDLE = rgba(244, 244, 245, 0.10);
+CARD_HOVER_BORDER_IDLE = rgba(228, 228, 231, 0.44);
+CARD_BACKGROUND_DOWNLOADED = rgba(255, 160, 122, 0.24);
+CARD_BORDER_DOWNLOADED = rgba(255, 196, 171, 0.82);
+CARD_HOVER_BORDER_DOWNLOADED = rgba(255, 210, 190, 0.94);
+CARD_PREVIEW_BACKGROUND = rgba(244, 244, 245, 0.06);
+CARD_PREVIEW_BACKGROUND_HOVER = rgba(244, 244, 245, 0.12);
+CARD_PREVIEW_UNSUPPORTED_TEXT = #b65239;
+CARD_SELECTION_BORDER = rgba(255, 239, 224, 0.82);
+CARD_SELECTION_FILL_START = rgba(65, 88, 208, 0.34);
+CARD_SELECTION_FILL_MID = rgba(200, 80, 192, 0.28);
+CARD_SELECTION_FILL_END = rgba(255, 204, 112, 0.34);
+CARD_PREVIEW_SELECTED_BORDER = rgba(255, 255, 255, 0.24);
+CARD_PREVIEW_SELECTED_OVERLAY_START = rgba(255, 255, 255, 0.18);
+CARD_PREVIEW_SELECTED_OVERLAY_END = rgba(255, 255, 255, 0.04);
+CARD_PREVIEW_DOWNLOADED_GRAYSCALE = 1.0;
+CARD_PREVIEW_DOWNLOADED_OPACITY = 0.6;
+CARD_GLOW_COLOR = rgba(255, 190, 184, 0.74);
+CARD_CHECKBOX_OPACITY = 0.25;
+CARD_CHECKBOX_DISABLED_OPACITY = 0.25;
+CARD_CHECKBOX_GRADIENT_START = #acb1cb;
+CARD_CHECKBOX_GRADIENT_MID = #d1aacf;
+CARD_CHECKBOX_GRADIENT_END = #a99f8d;
+CARD_CHECKBOX_SHADOW = rgba(255, 190, 184, 112);
+CARD_CHECKBOX_INNER = rgba(255, 255, 255, 244);
+CARD_CHECKBOX_OFFSET_X = 12;
+CARD_CHECKBOX_OFFSET_Y = 12;
+CARD_VIDEO_BADGE_BG = rgba(0, 0, 0, 0.68);
+CARD_VIDEO_BADGE_TEXT = rgba(255, 255, 255, 0.94);
+CARD_PROGRESS_PLATE = rgba(0, 0, 0, 0.55);
+CARD_PROGRESS_TRACK = rgba(244, 244, 245, 0.28);
+CARD_PROGRESS_ARC = #62c3ff;
+CARD_PROGRESS_FAILED = #d13438;
+GROUP_BACKGROUND = rgba(28, 28, 31, 0.96);
+GROUP_BORDER = rgba(244, 244, 245, 0.08);
+GROUP_HEADER_TEXT = rgba(250, 250, 250, 0.97);
+GROUP_HEADER_MUTED = rgba(212, 212, 216, 0.72);
+GROUP_HIGHLIGHT = rgba(160, 134, 232, 0.24);
+TOOLBAR_BACKGROUND = rgba(18, 18, 20, 0.98);
+TOOLBAR_BORDER = rgba(244, 244, 245, 0.10);
+TOOLBAR_MUTED = rgba(212, 212, 216, 0.72);
+SELECTION_BORDER = rgba(226, 232, 240, 0.92);
+SELECTION_BACKGROUND = rgba(61, 174, 255, 0.20);
+PAGE_NAV_FAB_BG = rgba(28, 28, 31, 0.96);
+PAGE_NAV_FAB_FG = rgba(212, 212, 216, 0.90);
+PAGE_NAV_FAB_BORDER = rgba(244, 244, 245, 0.10);
+PAGE_NAV_FAB_HOVER_BORDER = rgba(200, 180, 186, 0.28);
+PAGE_NAV_FAB_SHADOW = rgba(0, 0, 0, 0.36);
+/* @endtokens */
+
+/* @section card */
+PawchiveCardWidget {
+    background: ${CARD_BACKGROUND};
+    border: 1px solid ${CARD_BORDER};
+    border-radius: 18px;
+}
+PawchiveCardWidget:hover {
+    border-color: ${CARD_HOVER_BORDER};
+}
+PawchiveCardWidget[selected="true"] {
+    background: qlineargradient(
+        x1: 0, y1: 0, x2: 1, y2: 1,
+        stop: 0 ${CARD_SELECTION_FILL_START},
+        stop: 0.46 ${CARD_SELECTION_FILL_MID},
+        stop: 1 ${CARD_SELECTION_FILL_END}
+    );
+    border: 2px solid ${CARD_SELECTION_BORDER};
+}
+PawchiveCardWidget[selected="true"] QPushButton#PawchiveCardPreview {
+    border: 1px solid ${CARD_PREVIEW_SELECTED_BORDER};
+    background: qlineargradient(
+        x1: 0, y1: 0, x2: 1, y2: 1,
+        stop: 0 ${CARD_PREVIEW_SELECTED_OVERLAY_START},
+        stop: 1 ${CARD_PREVIEW_SELECTED_OVERLAY_END}
+    );
+}
+QPushButton#PawchiveCardPreview {
+    border: none;
+    border-radius: 14px;
+    background: ${CARD_PREVIEW_BACKGROUND};
+    color: ${TEXT};
+    text-align: center;
+}
+QPushButton#PawchiveCardPreview:hover {
+    background: ${CARD_PREVIEW_BACKGROUND_HOVER};
+}
+QPushButton#PawchiveCardPreview[unsupported="true"] {
+    color: ${CARD_PREVIEW_UNSUPPORTED_TEXT};
+}
+/* @endsection */
+
+/* @section post_group */
+QWidget#PawchivePostGroup {
+    background: transparent;
+}
+QWidget#PawchivePostGroupHeader {
+    background: ${GROUP_BACKGROUND};
+    border: 1px solid ${GROUP_BORDER};
+    border-radius: 10px;
+}
+QWidget#PawchivePostGroupHeader[highlight="true"] {
+    background: ${GROUP_HIGHLIGHT};
+}
+QLabel#PawchiveGroupTitle {
+    color: ${GROUP_HEADER_TEXT};
+    font-weight: 600;
+}
+QLabel#PawchiveGroupMeta {
+    color: ${GROUP_HEADER_MUTED};
+}
+QLabel#PawchiveGroupCount {
+    color: ${GROUP_HEADER_MUTED};
+}
+QCheckBox#PawchiveGroupCheck {
+    color: ${GROUP_HEADER_TEXT};
+}
+QCheckBox#PawchiveGroupCheck::indicator {
+    width: 14px;
+    height: 14px;
+    border: 1px solid ${GROUP_HEADER_MUTED};
+    border-radius: 3px;
+    background: transparent;
+}
+QCheckBox#PawchiveGroupCheck::indicator:checked {
+    background: ${CARD_SELECTION_BORDER};
+    border-color: ${CARD_SELECTION_BORDER};
+}
+QCheckBox#PawchiveGroupCheck::indicator:indeterminate {
+    background: ${CARD_SELECTION_BORDER};
+    border-color: ${CARD_SELECTION_BORDER};
+}
+QCheckBox#PawchiveGroupCheck::indicator:disabled {
+    border-color: ${GROUP_BORDER};
+    background: transparent;
+}
+/* 组右列：不可预览的下载资产（多选勾）。**不再自带背景/描边**：组内已经有
+   一张卡，第二层容器就是割裂感的来源。做成透明附注列，hover 用中性色。 */
+QListWidget#PawchiveAssetList {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+QListWidget#PawchiveAssetList::item {
+    color: ${GROUP_HEADER_TEXT};
+    padding: 4px 6px;
+    border-radius: 6px;
+}
+QListWidget#PawchiveAssetList::item:hover {
+    background: ${CARD_PREVIEW_BACKGROUND};
+}
+QListWidget#PawchiveAssetList::item:disabled {
+    color: ${GROUP_HEADER_MUTED};
+}
+QListWidget#PawchiveAssetList::indicator {
+    width: 14px;
+    height: 14px;
+    border: 1px solid ${GROUP_HEADER_MUTED};
+    border-radius: 3px;
+    background: transparent;
+}
+QListWidget#PawchiveAssetList::indicator:checked {
+    background: ${CARD_SELECTION_BORDER};
+    border-color: ${CARD_SELECTION_BORDER};
+}
+QListWidget#PawchiveAssetList::indicator:disabled {
+    border-color: ${GROUP_BORDER};
+    background: transparent;
+}
+/* @endsection */
+
+/* @section grid_toolbar */
+/* 网格工具栏是"内容上的工具行"，不是第二张卡：底栏已经贴边，再叠一张圆角卡
+   就是两条横条贴在一起（用户现场"一股割裂感"）。 */
+QFrame#PawchiveGridToolbar {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+}
+QLabel#PawchiveGridTitle {
+    color: ${TEXT};
+    font-weight: 600;
+}
+QLabel#PawchiveGridCount {
+    color: ${TOOLBAR_MUTED};
+    font-size: 12px;
+}
+QFrame#PawchiveToolbarDivider {
+    min-width: 1px;
+    max-width: 1px;
+    min-height: 18px;
+    max-height: 18px;
+    background: ${TOOLBAR_BORDER};
+    border: none;
+}
+QWidget#PawchiveGridContent {
+    background: transparent;
+}
+QAbstractScrollArea#PawchiveGridScrollArea {
+    background: transparent;
+    border: none;
+}
+/* @endsection */
+
+/* @section page_nav */
+QFrame#PawchivePageNav {
+    background: transparent;
+    border: none;
+}
+QLabel#PawchivePageLabel {
+    color: ${TEXT};
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 46px;
+}
+/* @endsection */
+
+/* @section bottom_bar */
+QFrame#PawchiveBottomBar {
+    min-height: 44px;
+    max-height: 44px;
+    background: ${TOOLBAR_BACKGROUND};
+    border: none;
+    border-top: 1px solid ${TOOLBAR_BORDER};
+    border-radius: 0;
+}
+QPushButton#PawchiveBottomAction {
+    min-height: 32px;
+    max-height: 32px;
+    padding: 0 10px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: ${TOOLBAR_MUTED};
+    font-size: 12px;
+}
+QPushButton#PawchiveBottomAction:hover {
+    background: ${CARD_PREVIEW_BACKGROUND};
+    color: ${TEXT};
+}
+QFrame#PawchiveBottomDivider {
+    min-width: 1px;
+    max-width: 1px;
+    min-height: 16px;
+    max-height: 16px;
+    background: ${TOOLBAR_BORDER};
+    border: none;
+}
+/* @endsection */
+
+/* Viewer chrome (frame / image surface / hint / video surface / top bar) is NOT
+   themed here. It lives in `ui/core/theme/viewer.qss` and is shared by every
+   site viewer, so light/dark cannot drift between danbooru and pawchive. */
